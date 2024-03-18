@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpHeight;
     private Vector2 boxColliderSize, boxColliderOffset;
     private Rigidbody2D rb;
-    private float verticalInput, horizontalInput;
+    private float horizontalInput;
+    private bool jumpInput, grounded;
 
     private void Awake()
     {
@@ -23,22 +24,38 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // Fetch Input
-        verticalInput = Input.GetAxisRaw("Jump");
+        jumpInput = Input.GetKeyDown(KeyCode.Space);
         horizontalInput = Input.GetAxisRaw("Horizontal");
 
-        Movement(horizontalInput, verticalInput);
-        TriggerAnimations(horizontalInput, verticalInput);
+        Movement(horizontalInput);
+        TriggerAnimations(horizontalInput, jumpInput);
     }
 
     private void FixedUpdate()
     {
-        if(verticalInput > 0)
+        if(jumpInput && grounded)
         {
             rb.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Force);
         }
     }
 
-    private void Movement(float _horizontal, float _vertical)
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Ground")
+        {
+            grounded = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            grounded = false;
+        }
+    }
+
+    private void Movement(float _horizontal)
     {
         // Horizontal Movement
         Vector3 pos = transform.position;
@@ -58,12 +75,9 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.localScale = scale;
-
-        // Vertical Movement (jump)
-        
     }
 
-    private void TriggerAnimations(float _horizontal, float _vertical)
+    private void TriggerAnimations(float _horizontal, bool _jumpInput)
     {
         // Trigger Run animation
         animator.SetFloat("speed", Mathf.Abs(_horizontal));
@@ -81,7 +95,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Trigger Jump Animation when vertical input is received
-        if (_vertical > 0)
+        if (_jumpInput)
         {
             animator.SetBool("jump", true);
         }
