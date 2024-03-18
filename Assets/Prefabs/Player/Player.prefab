@@ -196,4 +196,4 @@ MonoBehaviour:
   animator: {fileID: 7354762999162280137}
   boxCollider2D: {fileID: 6704169959225078258}
   speed: 3
-  jumpHeight: 45
+  jumpHeight: 120
