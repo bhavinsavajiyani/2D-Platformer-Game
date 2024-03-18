@@ -9,20 +9,47 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float speed = Input.GetAxisRaw("Horizontal");
-        animator.SetFloat("speed", Mathf.Abs(speed));
+        // Fetch Input
+        float verticalInput = Input.GetAxisRaw("Vertical");
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
 
+        // Trigger Run animation
+        animator.SetFloat("speed", Mathf.Abs(horizontalInput));
+
+        // Make player face in the direction of input
         Vector3 scale = transform.localScale;
-        if(speed < 0)
+        if(horizontalInput < 0)
         {
             scale.x = Mathf.Abs(transform.localScale.x) * -1.0f;
         }
 
-        else if (speed > 0)
+        else if (horizontalInput > 0)
         {
             scale.x = Mathf.Abs(transform.localScale.x);
         }
 
         transform.localScale = scale;
+
+        // Trigger Crouch Animation when CTRL key is pressed
+        if(Input.GetKey(KeyCode.LeftControl) ||  Input.GetKey(KeyCode.RightControl))
+        {
+            animator.SetBool("crouch", true);
+        }
+
+        else if(Input.GetKeyUp(KeyCode.LeftControl) || Input.GetKeyUp(KeyCode.RightControl))
+        {
+            animator.SetBool("crouch", false);
+        }
+
+        // Trigger Jump Animation when vertical input is received
+        if(verticalInput > 0)
+        {
+            animator.SetBool("jump", true);
+        }
+
+        else if(verticalInput <= 0)
+        {
+            animator.SetBool("jump", false);
+        }
     }
 }
