@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Animator animator;
+    [SerializeField] private Animator animator;
+    [SerializeField] private BoxCollider2D boxCollider2D;
+    private Vector2 boxColliderSize, boxColliderOffset;
+
+    private void Awake()
+    {
+        boxColliderSize = boxCollider2D.size;
+        boxColliderOffset = boxCollider2D.offset;
+    }
 
     // Update is called once per frame
     void Update()
@@ -34,6 +42,11 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKey(KeyCode.LeftControl) ||  Input.GetKey(KeyCode.RightControl))
         {
             animator.SetBool("crouch", true);
+
+            Vector2 targetOffset = new Vector2(0.01172504f, 0.5346941f);
+            Vector2 targetSize = new Vector2(0.5128101f, 1.245243f);
+            boxCollider2D.offset = targetOffset;
+            boxCollider2D.size = targetSize;
         }
 
         else if(Input.GetKeyUp(KeyCode.LeftControl) || Input.GetKeyUp(KeyCode.RightControl))
@@ -52,4 +65,15 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("jump", false);
         }
     }
+
+    public void Crouch()
+    {
+        boxCollider2D.offset = boxColliderOffset;
+        boxCollider2D.size = boxColliderSize;
+    }
 }
+
+// offsetX = 0.01172504
+// offsetY = 0.5346941
+// sizeX = 0.5128101
+// sizeY = 1.245243
