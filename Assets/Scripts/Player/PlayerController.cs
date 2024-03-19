@@ -27,16 +27,13 @@ public class PlayerController : MonoBehaviour
         jumpInput = Input.GetKeyDown(KeyCode.Space);
         horizontalInput = Input.GetAxisRaw("Horizontal");
 
-        Movement(horizontalInput);
-        TriggerAnimations(horizontalInput, jumpInput);
-    }
-
-    private void FixedUpdate()
-    {
-        if(jumpInput && grounded)
+        if (jumpInput && grounded)
         {
             rb.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Force);
         }
+
+        Movement(horizontalInput);
+        TriggerAnimations(horizontalInput, jumpInput);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
