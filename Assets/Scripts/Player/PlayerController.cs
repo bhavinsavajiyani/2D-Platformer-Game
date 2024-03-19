@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private BoxCollider2D boxCollider2D;
     [SerializeField] private float speed;
     [SerializeField] private float jumpHeight;
+    [SerializeField] private ScoreController scoreController;
     private Vector2 boxColliderSize, boxColliderOffset;
     private Rigidbody2D rb;
     private float horizontalInput;
@@ -116,5 +117,11 @@ public class PlayerController : MonoBehaviour
     {
         boxCollider2D.offset = boxColliderOffset;
         boxCollider2D.size = boxColliderSize;
+    }
+
+    public void KeyCollected()
+    {
+        Debug.Log("Key Collected...");
+        scoreController.IncreaseScore(10);
     }
 }
