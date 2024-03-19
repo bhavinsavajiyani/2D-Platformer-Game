@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -123,5 +124,19 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Key Collected...");
         scoreController.IncreaseScore(10);
+    }
+
+    public void PlayerKilled()
+    {
+        Debug.Log("You got Killed...");
+        animator.SetBool("died", true);
+        StartCoroutine(RestartLevel());
+    }
+
+    private IEnumerator RestartLevel()
+    {
+        Debug.Log("Restrating the level!");
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
