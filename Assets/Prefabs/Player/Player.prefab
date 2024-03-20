@@ -138,7 +138,8 @@ GameObject:
   - component: {fileID: 2157182491558853142}
   - component: {fileID: 6704169959225078258}
   - component: {fileID: 2914533025605827298}
-  m_Layer: 0
+  - component: {fileID: 1773611824918033940}
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -324,6 +325,23 @@ MonoBehaviour:
   speed: 6
   jumpHeight: 750
   scoreController: {fileID: 0}
+  respawnPlayer: {fileID: 0}
+--- !u!114 &1773611824918033940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719199827208220756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cb0ae197feb2c4469b95151c222a123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hearts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1767265937980050152
 GameObject:
   m_ObjectHideFlags: 0

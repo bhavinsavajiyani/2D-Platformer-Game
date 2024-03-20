@@ -10,7 +10,12 @@ public class RespawnPlayer : MonoBehaviour
     {
         if(collision.gameObject.GetComponent<PlayerController>() != null)
         {
-            collision.gameObject.transform.position = respwanPoint.position;
+            collision.gameObject.GetComponent<PlayerController>().PlayerKilled();
         }
+    }
+
+    public void Respawn(GameObject target)
+    {
+        target.transform.position = respwanPoint.position;
     }
 }

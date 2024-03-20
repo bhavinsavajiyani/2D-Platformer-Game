@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5834278894034450134}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GroundChecker
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 6711518746651134106}
   - component: {fileID: 1313277108137338456}
   - component: {fileID: 2279289058543579876}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy_Spitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}

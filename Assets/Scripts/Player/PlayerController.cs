@@ -10,14 +10,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float jumpHeight;
     [SerializeField] private ScoreController scoreController;
+    [SerializeField] private RespawnPlayer respawnPlayer;
     private Vector2 boxColliderSize, boxColliderOffset;
     private Rigidbody2D rb;
     private float horizontalInput;
     private bool jumpInput, grounded;
+    private PlayerHealthController healthController;
 
     private void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        healthController = gameObject.GetComponent<PlayerHealthController>();
         boxColliderSize = boxCollider2D.size;
         boxColliderOffset = boxCollider2D.offset;
     }
@@ -128,9 +131,17 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerKilled()
     {
-        Debug.Log("You got Killed...");
-        animator.SetBool("died", true);
-        StartCoroutine(RestartLevel());
+        if(healthController.LifeLost() > 0)
+        {
+            StartCoroutine(RespawnPlayer());
+        }
+
+        else if(healthController.LifeLost() <= 0)
+        {
+            Debug.Log("You got Killed...");
+            animator.SetBool("died", true);
+            StartCoroutine(RestartLevel());
+        }
     }
 
     private IEnumerator RestartLevel()
@@ -138,5 +149,12 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Restrating the level!");
         yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private IEnumerator RespawnPlayer()
+    {
+        animator.Play("Player_Damage");
+        yield return new WaitForSeconds(0.6f);
+        respawnPlayer.Respawn(gameObject);
     }
 }
