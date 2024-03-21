@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpHeight;
     [SerializeField] private ScoreController scoreController;
     [SerializeField] private RespawnPlayer respawnPlayer;
+    [SerializeField] private GameOverController gameOverController;
     private Vector2 boxColliderSize, boxColliderOffset;
     private Rigidbody2D rb;
     private float horizontalInput;
@@ -140,15 +141,9 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("You got Killed...");
             animator.SetBool("died", true);
-            StartCoroutine(RestartLevel());
+            rb.bodyType = RigidbodyType2D.Static;
+            gameOverController.GameOver();
         }
-    }
-
-    private IEnumerator RestartLevel()
-    {
-        Debug.Log("Restrating the level!");
-        yield return new WaitForSeconds(1.5f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private IEnumerator RespawnPlayer()
