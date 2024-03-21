@@ -275,11 +275,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2022257901}
-    - target: {fileID: 7710578257857114606, guid: 93aaa5ecd249e9040804c4309b2ebed1,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadGivenScene
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8795,6 +8790,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1791361662}
   m_CullTransparentMesh: 1
+--- !u!114 &1916746521 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1219259316319447539, guid: 93aaa5ecd249e9040804c4309b2ebed1,
+    type: 3}
+  m_PrefabInstance: {fileID: 465119909}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48b8247201a68c4d901e02a77b03ae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1945585540
 GameObject:
   m_ObjectHideFlags: 0
@@ -9097,7 +9104,7 @@ PrefabInstance:
         type: 3}
       propertyPath: gameOverController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1916746521}
     - target: {fileID: 8194657255581534796, guid: 05fedf62438716a4c92e513a2d85bed8,
         type: 3}
       propertyPath: m_LocalPosition.x
