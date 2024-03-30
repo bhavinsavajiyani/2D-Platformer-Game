@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 boxColliderSize, boxColliderOffset;
     private Rigidbody2D rb;
     private float horizontalInput;
-    private bool jumpInput, grounded;
+    private bool isMoving, jumpInput, grounded;
     private PlayerHealthController healthController;
 
     private void Awake()
@@ -32,6 +32,29 @@ public class PlayerController : MonoBehaviour
         // Fetch Input
         jumpInput = Input.GetKeyDown(KeyCode.Space);
         horizontalInput = Input.GetAxisRaw("Horizontal");
+
+        if(horizontalInput != 0)
+        {
+            isMoving = true;
+        }
+
+        else
+        {
+            isMoving = false;
+        }
+
+        if(isMoving && grounded)
+        {
+            if(!SoundManager.Instance.soundFXSource.isPlaying)
+            {
+                SoundManager.Instance.PlaySound(SoundType.PlayerMovement);
+            }
+        }
+
+        else
+        {
+            SoundManager.Instance.soundFXSource.Stop();
+        }
 
         if (jumpInput && grounded)
         {
