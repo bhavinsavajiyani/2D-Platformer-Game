@@ -51,11 +51,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        else
-        {
-            SoundManager.Instance.soundFXSource.Stop();
-        }
-
         if (jumpInput && grounded)
         {
             rb.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Force);
@@ -163,6 +158,7 @@ public class PlayerController : MonoBehaviour
         else if(healthController.LifeLost() <= 0)
         {
             Debug.Log("You got Killed...");
+            StartCoroutine(PlayDeathSound());
             animator.SetBool("died", true);
             rb.bodyType = RigidbodyType2D.Static;
             gameOverController.GameOver();
@@ -174,5 +170,11 @@ public class PlayerController : MonoBehaviour
         animator.Play("Player_Damage");
         yield return new WaitForSeconds(0.6f);
         respawnPlayer.Respawn(gameObject);
+    }
+
+    private IEnumerator PlayDeathSound()
+    {
+        SoundManager.Instance.PlaySound(SoundType.PlayerDeath);
+        yield return new WaitForSeconds(0.4f);
     }
 }
