@@ -8,7 +8,8 @@ public enum SoundType
     PlayerMovement,
     ButtonClick,
     BG,
-    PlayerDeath
+    PlayerDeath,
+    LevelComplete
 }
 
 [Serializable]

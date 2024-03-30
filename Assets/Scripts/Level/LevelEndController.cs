@@ -10,6 +10,7 @@ public class LevelEndController : MonoBehaviour
         if(collision.gameObject.GetComponent<PlayerController>() != null)
         {
             // SceneManager.LoadScene(nextSceneToLoad);
+            SoundManager.Instance.PlaySound(SoundType.LevelComplete);
             LevelManager.Instance.LevelComplete();
         }
     }
